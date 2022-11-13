@@ -1,18 +1,19 @@
 using System;
 using UnityEngine;
 
-public class NumberData
+public struct NumberData
 {
     private const byte GRADE_SIZE = 10;
     private const byte DIMENSION_SIZE = 20;
 
     // value + grade
-    private sbyte[] _numbers = new sbyte[DIMENSION_SIZE];
+    private sbyte[] _numbers;
 
     public sbyte[] Numbers => _numbers;
 
     public NumberData(sbyte[] numbers)
     {
+        _numbers = new sbyte[DIMENSION_SIZE];
         _numbers = numbers;
     }
 
@@ -247,7 +248,7 @@ public class NumberData
         if (str.Length > DIMENSION_SIZE)
         {
             Debug.LogError("string is too long! Maximum length is " + DIMENSION_SIZE);
-            return null;
+            return new NumberData();
         }
 
         for (int i = 0; i < str.Length; i++)
