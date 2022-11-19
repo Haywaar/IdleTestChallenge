@@ -199,6 +199,24 @@ public struct NumberData
 
         return false;
     }
+    
+    public static bool operator >=(NumberData a, NumberData b)
+    {
+        for (int i = DIMENSION_SIZE - 1; i >= 0; i--)
+        {
+            if (a.Numbers[i] > b.Numbers[i])
+            {
+                return true;
+            }
+
+            if (a.Numbers[i] < b.Numbers[i])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     public static bool operator <(NumberData a, NumberData b)
     {
@@ -216,6 +234,24 @@ public struct NumberData
         }
 
         return false;
+    }
+    
+    public static bool operator <=(NumberData a, NumberData b)
+    {
+        for (int i = DIMENSION_SIZE - 1; i >= 0; i--)
+        {
+            if (a.Numbers[i] > b.Numbers[i])
+            {
+                return false;
+            }
+
+            if (a.Numbers[i] < b.Numbers[i])
+            {
+                return true;
+            }
+        }
+
+        return true;
     }
 
     public static NumberData FromInt(int value)

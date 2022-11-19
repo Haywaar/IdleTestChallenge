@@ -169,4 +169,88 @@ public class NumberData_Multiply_Equal_Greater
         // Assert
         Assert.AreEqual("456", outStr);
     }
+    
+    [Test]
+    public void NumberData_Greater_Or_Equals()
+    {
+        // Arrange
+        var a = NumberData.FromString("456");
+        var b = NumberData.FromString("455");
+
+        // Act
+        bool rez = a >= b;
+
+        // Assert
+        Assert.AreEqual(true, rez);
+    }
+    
+    [Test]
+    public void NumberData_Greater_Or_Equals_2()
+    {
+        // Arrange
+        var a = NumberData.FromString("123");
+        var b = NumberData.FromString("455");
+
+        // Act
+        bool rez = a >= b;
+
+        // Assert
+        Assert.AreEqual(false, rez);
+    }
+    
+    [Test]
+    public void NumberData_Greater_Or_Equals_Same()
+    {
+        // Arrange
+        var a = NumberData.FromString("456");
+        var b = NumberData.FromString("456");
+
+        // Act
+        bool rez = a >= b;
+
+        // Assert
+        Assert.AreEqual(true, rez);
+    }
+    
+    [Test]
+    public void NumberData_Lesser_Or_Equals()
+    {
+        // Arrange
+        var a = NumberData.FromString("123");
+        var b = NumberData.FromString("455");
+
+        // Act
+        bool rez = a <= b;
+
+        // Assert
+        Assert.AreEqual(true, rez);
+    }
+    
+    [Test]
+    public void NumberData_Lesser_Or_Equals_Same()
+    {
+        // Arrange
+        var a = NumberData.FromString("455");
+        var b = NumberData.FromString("455");
+
+        // Act
+        bool rez = a <= b;
+
+        // Assert
+        Assert.AreEqual(true, rez);
+    }
+    
+    [Test]
+    public void NumberData_Lesser_Or_Equals_Diff_Length()
+    {
+        // Arrange
+        var a = NumberData.FromString("1455");
+        var b = NumberData.FromString("455");
+
+        // Act
+        bool rez = a <= b;
+
+        // Assert
+        Assert.AreEqual(false, rez);
+    }
 }

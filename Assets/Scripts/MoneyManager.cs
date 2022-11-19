@@ -1,22 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
+using Zenject.Signals;
 
 public class MoneyManager : MonoBehaviour
 {
+    [SerializeField] private int _startMoney = 0;
     private NumberData _money;
 
     public NumberData Money => _money;
 
-    private void OnMoneyAdded(NumberData value)
+    private SignalBus _signalBus;
+
+    [Inject]
+    private void Construct(SignalBus signalBus)
     {
-        _money += value;
-        //send signal - money added
+        _signalBus = signalBus;
+        
+        _signalBus.Subscribe<AddMoneySignal>(OnMoneyAdd);
+        _signalBus.Subscribe<SpendMoneySignal>(OnMoneySpent);
     }
-    
-    private void OnMoneySpent(NumberData value)
+
+    private void OnMoneyAdd(AddMoneySignal signal)
     {
-        _money -= value;
-        //send signal - money spent
+        _money += signal.Value;
+
+        _signalBus.Fire(new MoneyChangedSignal(_money));
+    }
+
+    private void Start()
+    {
+        _money = NumberData.FromInt(_startMoney);
+        _signalBus.Fire(new MoneyChangedSignal(_money));
+    }
+
+    private void OnMoneySpent(SpendMoneySignal signal)
+    {
+        _money -= signal.Value;
+        _signalBus.Fire(new MoneyChangedSignal(_money));
     }
 }

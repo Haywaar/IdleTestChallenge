@@ -1,4 +1,5 @@
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Digger
@@ -9,17 +10,17 @@ namespace Digger
         {
         }
 
-        private void Start()
+        public void StartAttack()
         {
-            StartCoroutine(PeriodicAttackCoroutine(1.0f));
+            PeriodicAttack(1.0f);
         }
 
-        private IEnumerator PeriodicAttackCoroutine(float cooldown)
+        private async void PeriodicAttack(float cooldown)
         {
             while (true)
             {
                 Attack();
-                yield return new WaitForSeconds(cooldown);
+                await UniTask.Delay((int)(cooldown * 1000));
             }
         }
 

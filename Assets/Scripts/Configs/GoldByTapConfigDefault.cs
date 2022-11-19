@@ -2,10 +2,12 @@ using UnityEngine;
 
 namespace Configs
 {
+    [CreateAssetMenu(fileName = "GoldByTapConfig", menuName = "ScriptableObjects/GoldByTapConfig", order = 1)]
     public class GoldByTapConfigDefault : GoldByTapConfig
     {
-        [SerializeField] private float koef1;
-        [SerializeField] private float koef2;
+        [Header("Formula = k1 * (level^k2)")]
+        [SerializeField] private float koef1 = 5;
+        [SerializeField] private float koef2 = 2.1f;
         
         public override NumberData GetGoldByTapValue(int level)
         {
