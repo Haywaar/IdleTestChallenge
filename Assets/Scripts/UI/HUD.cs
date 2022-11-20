@@ -9,7 +9,8 @@ namespace UI
     public class HUD : MonoBehaviour
     {
         [SerializeField] private Text _goldText;
-        [SerializeField] private BuyCircleButton _buyCircleButton;
+        [SerializeField] private ButtonWithPrice _buyCircleButton;
+        [SerializeField] private ButtonWithPrice _upgradePlayerButton;
 
         private SignalBus _signalBus;
         private DiggerManager _diggerManager;
@@ -23,21 +24,33 @@ namespace UI
         
             _signalBus.Subscribe<MoneyChangedSignal>(OnMoneyChanged);
             _signalBus.Subscribe<CircleCreatedSignal>(OnCircleCreated);
+            _signalBus.Subscribe<UpgradeDiggerSignal>(OnDiggerUpdated);
+            _signalBus.Subscribe<GameStartedSignal>(OnGameStarted);
         }
 
+       
         private void OnCircleCreated()
         {
             _buyCircleButton.SetPrice(_diggerManager.GetBuyCirclePrice());
         }
 
-        private void Awake()
+        private void OnGameStarted()
         {
             _buyCircleButton.Init(BuyCircleButtonClicked, _diggerManager.GetBuyCirclePrice());
+            _upgradePlayerButton.Init(UpgradePlayerButtonClicked, _diggerManager.GetUpgradePrice(DiggerManager.PlayerDiggerId));
+            
+            _buyCircleButton.SetInteractable(_diggerManager.CanBuyCircle());
+            _upgradePlayerButton.SetInteractable(_diggerManager.CanUpgrade(DiggerManager.PlayerDiggerId));
         }
 
         private void BuyCircleButtonClicked()
         {
           _diggerManager.BuyCircle();
+        }
+        
+        private void UpgradePlayerButtonClicked()
+        {
+            _diggerManager.Upgrade(DiggerManager.PlayerDiggerId);
         }
 
         private void OnMoneyChanged(MoneyChangedSignal signal)
@@ -53,6 +66,17 @@ namespace UI
                 _buyCircleButton.SetInteractable(_diggerManager.CanBuyCircle());
             }
 
+            _upgradePlayerButton.SetInteractable(_diggerManager.CanUpgrade(DiggerManager.PlayerDiggerId));
+
         }
+        
+        private void OnDiggerUpdated(UpgradeDiggerSignal signal)
+        {
+            if (DiggerManager.PlayerDiggerId == signal.Id)
+            {
+                _upgradePlayerButton.SetPrice(_diggerManager.GetUpgradePrice(DiggerManager.PlayerDiggerId));
+            }
+        }
+
     }
 }

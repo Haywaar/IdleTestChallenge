@@ -10,7 +10,7 @@ namespace Digger
 
         protected int _level;
 
-        private SignalBus _signalBus;
+        protected SignalBus _signalBus;
 
         public int ID => _id;
 
@@ -20,6 +20,17 @@ namespace Digger
         protected void Construct(SignalBus signalBus)
         {
             _signalBus = signalBus;
+            
+            _signalBus.Subscribe<UpgradeDiggerSignal>(OnUpgrade);
+            OnInjected();
+        }
+
+        private void OnUpgrade(UpgradeDiggerSignal signal)
+        {
+            if (signal.Id == _id)
+            {
+                _level = signal.Level;
+            }
         }
 
         public Digger(int id, int level)
@@ -33,9 +44,8 @@ namespace Digger
             _signalBus.Fire(new AttackSignal(_id, _level));
         }
 
-        protected virtual void OnUpgrade(int id, int level)
+        protected virtual void OnInjected()
         {
-            _level = level;
         }
     }
 }

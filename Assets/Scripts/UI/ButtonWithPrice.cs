@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class BuyCircleButton : MonoBehaviour
+    public class ButtonWithPrice : MonoBehaviour
     {
         [SerializeField] private Button _button;
         [SerializeField] private Text _priceText;

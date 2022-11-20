@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 using Zenject.Signals;
@@ -27,9 +28,13 @@ public class MoneyManager : MonoBehaviour
         _signalBus.Fire(new MoneyChangedSignal(_money));
     }
 
-    private void Start()
+    private void Awake()
     {
         _money = NumberData.FromInt(_startMoney);
+    }
+
+    private void Start()
+    {
         _signalBus.Fire(new MoneyChangedSignal(_money));
     }
 

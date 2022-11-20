@@ -1,18 +1,21 @@
 using System.Collections;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject.Signals;
 
 namespace Digger
 {
     public class CircleDigger : Digger
     {
-        public CircleDigger(int id, int level) : base(id, level)
+        private readonly float _cooldown;
+        public CircleDigger(int id, int level, float cooldown) : base(id, level)
         {
+            _cooldown = cooldown;
         }
 
         public void StartAttack()
         {
-            PeriodicAttack(1.0f);
+            PeriodicAttack(_cooldown);
         }
 
         private async void PeriodicAttack(float cooldown)
@@ -22,12 +25,6 @@ namespace Digger
                 Attack();
                 await UniTask.Delay((int)(cooldown * 1000));
             }
-        }
-
-        protected override void OnUpgrade(int id, int level)
-        {
-            base.OnUpgrade(id, level);
-            //TODO - play animation
         }
     }
 }

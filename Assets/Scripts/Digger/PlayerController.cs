@@ -4,18 +4,19 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
+using Zenject.Signals;
 
 namespace Digger
 {
     public class PlayerController : MonoBehaviour 
     {
         private RaycastHit hitObject;
-        private DiggerManager _diggerManager;
-
+        private SignalBus _signalBus;
+        
         [Inject]
-        private void Construct(DiggerManager diggerManager)
+        private void Construct(SignalBus signalBus)
         {
-            _diggerManager = diggerManager;
+            _signalBus = signalBus;
         }
 
         private void Update()
@@ -35,7 +36,19 @@ namespace Digger
                     {
                         if (result.gameObject.tag.Equals("Enemy"))
                         {
-                           _diggerManager.OnPlayerClicked();
+                            _signalBus.Fire(new PlayerClickedSignal());
+                           break;
+                        }
+                        
+                        if (result.gameObject.tag.Equals("Circle"))
+                        {
+                            // circle selected
+                            var circleDiggerView = result.gameObject.GetComponent<CircleDiggerView>();
+                            if (circleDiggerView != null)
+                            {
+                                _signalBus.Fire(new CircleClickedSignal(circleDiggerView.DiggerId, circleDiggerView.Level));
+                            }
+                            break;
                         }
                     }
                 }
