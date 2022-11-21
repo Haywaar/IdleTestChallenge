@@ -25,7 +25,7 @@ namespace UI
             _signalBus.Subscribe<MoneyChangedSignal>(OnMoneyChanged);
             _signalBus.Subscribe<CircleCreatedSignal>(OnCircleCreated);
             _signalBus.Subscribe<UpgradeDiggerSignal>(OnDiggerUpdated);
-            _signalBus.Subscribe<GameStartedSignal>(OnGameStarted);
+            _signalBus.Subscribe<LoadFinishedSignal>(OnGameStarted);
         }
 
        

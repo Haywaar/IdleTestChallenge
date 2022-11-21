@@ -1,0 +1,6 @@
+{
+ "maxCirclesCount":5,
+ "firstCirclePrice":9,
+ "nextBuyCircleCoef":5,
+ "circleAttackCooldown":1
+}

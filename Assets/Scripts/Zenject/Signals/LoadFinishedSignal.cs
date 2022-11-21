@@ -1,6 +1,6 @@
 namespace Zenject.Signals
 {
-    public class GameStartedSignal
+    public class LoadFinishedSignal
     {
     }
 }

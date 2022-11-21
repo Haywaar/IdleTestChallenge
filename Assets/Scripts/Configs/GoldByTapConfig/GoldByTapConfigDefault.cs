@@ -9,10 +9,10 @@ namespace Configs
         [SerializeField] private float koef1 = 5;
         [SerializeField] private float koef2 = 2.1f;
         
-        public override NumberData GetGoldByTapValue(int level)
+        public override NumberData.NumberData GetGoldByTapValue(int level)
         {
             var value = koef1 * Mathf.Pow(level, koef2);
-            return NumberData.FromInt(Mathf.FloorToInt(value));
+            return NumberData.NumberData.FromInt(Mathf.FloorToInt(value));
         }
     }
 }

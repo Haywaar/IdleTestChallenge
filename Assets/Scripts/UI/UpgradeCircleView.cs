@@ -36,7 +36,7 @@ namespace UI
          }
       }
 
-      public void Init(int diggerId, int level, NumberData price)
+      public void Init(int diggerId, int level, NumberData.NumberData price)
       {
          _diggerId = diggerId;
          _level = level;

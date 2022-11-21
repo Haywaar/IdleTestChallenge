@@ -9,10 +9,10 @@ namespace Configs
         [SerializeField] private float koef1 = 5;
         [SerializeField] private float koef2 = 1.08f;
 
-        public NumberData GetUpgradePrice(int level)
+        public NumberData.NumberData GetUpgradePrice(int level)
         {
             var value = Mathf.Pow((koef1 * koef2), level);
-            return NumberData.FromInt(Mathf.FloorToInt(value));
+            return NumberData.NumberData.FromInt(Mathf.FloorToInt(value));
         }
     }
 }

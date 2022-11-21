@@ -10,10 +10,10 @@ namespace Digger
 {
     public class DiggerManager : MonoBehaviour
     {
-        [SerializeField] private CircleConfig _circleConfig;
         [SerializeField] private GoldByTapConfig _goldByTapConfig;
         
         private IUpgradeConfig _upgradeConfig;
+        private ICircleConfig _circleConfig;
 
         public const int PlayerDiggerId = 0;
         private List<Digger> _diggers = new List<Digger>();
@@ -25,11 +25,12 @@ namespace Digger
         private DiContainer _container;
         
         [Inject]
-        private void Construct(SignalBus signalBus, MoneyManager moneyManager, DiContainer container, IUpgradeConfig upgradeConfig)
+        private void Construct(SignalBus signalBus, MoneyManager moneyManager, DiContainer container, IUpgradeConfig upgradeConfig, ICircleConfig circleConfig)
         {
             _signalBus = signalBus;
             _moneyManager = moneyManager;
             _upgradeConfig = upgradeConfig;
+            _circleConfig = circleConfig;
             
             _signalBus.Subscribe<AttackSignal>(OnAttack);
             _container = container;
@@ -52,7 +53,7 @@ namespace Digger
                 int diggerId = _diggers.Count;
                 int level = 1;
                 
-                var circleDigger = new CircleDigger(diggerId, level, _circleConfig.CircleAttackCooldown);
+                var circleDigger = new CircleDigger(diggerId, level, _circleConfig.GetCircleAttackCooldown());
                 _container.Inject(circleDigger);
                 circleDigger.StartAttack();
                 
@@ -65,7 +66,7 @@ namespace Digger
             }
         }
 
-        public NumberData GetBuyCirclePrice()
+        public NumberData.NumberData GetBuyCirclePrice()
         {
             int circlesCount = (_diggers.Count - 1);
             return _circleConfig.GetBuyPrice(circlesCount);
@@ -79,12 +80,12 @@ namespace Digger
 
         public bool MaxCirclesCount()
         {
-            return _diggers.Count == _circleConfig.MaxCirclesCount + 1;
+            return _diggers.Count == _circleConfig.GetMaxCirclesCount() + 1;
         }
 
         private bool HaveCircleSpots()
         {
-            return (_diggers.Count) < _circleConfig.MaxCirclesCount + 1;
+            return (_diggers.Count) < _circleConfig.GetMaxCirclesCount() + 1;
         }
         
         private void OnAttack(AttackSignal signal)
@@ -93,7 +94,7 @@ namespace Digger
             _signalBus.Fire(new AddMoneySignal(gold));
         }
         
-        public NumberData GetUpgradePrice(int diggerId)
+        public NumberData.NumberData GetUpgradePrice(int diggerId)
         {
             var diggerLevel = _diggers.First(x => x.ID == diggerId).Level;
             return _upgradeConfig.GetUpgradePrice(diggerLevel);

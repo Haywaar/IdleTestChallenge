@@ -1,6 +1,4 @@
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
 
 public class NumberDataTestScript_OperationsPlusAndMinus
 {
@@ -8,8 +6,8 @@ public class NumberDataTestScript_OperationsPlusAndMinus
     public void NumberData_Sum()
     {
         // Arrange
-        var a = NumberData.FromString("110");
-        var b = NumberData.FromString("110");
+        var a = NumberData.NumberData.FromString("110");
+        var b = NumberData.NumberData.FromString("110");
         // Act
         var c = a + b;
         var outStr = c.ToString();
@@ -22,8 +20,8 @@ public class NumberDataTestScript_OperationsPlusAndMinus
     public void NumberData_Sum_WithZero()
     {
         // Arrange
-        var a = NumberData.FromString("123");
-        var b = NumberData.FromString("0");
+        var a = NumberData.NumberData.FromString("123");
+        var b = NumberData.NumberData.FromString("0");
         // Act
         var c = a + b;
         var outStr = c.ToString();
@@ -36,8 +34,8 @@ public class NumberDataTestScript_OperationsPlusAndMinus
     public void NumberData_Sum_WithNeg()
     {
         // Arrange
-        var a = NumberData.FromString("30");
-        var b = NumberData.FromString("-100");
+        var a = NumberData.NumberData.FromString("30");
+        var b = NumberData.NumberData.FromString("-100");
         // Act
         var c = a + b;
         var outStr = c.ToString();
@@ -50,8 +48,8 @@ public class NumberDataTestScript_OperationsPlusAndMinus
     public void NumberData_Sum_TwoNegs()
     {
         // Arrange
-        var a = NumberData.FromString("-30");
-        var b = NumberData.FromString("-100");
+        var a = NumberData.NumberData.FromString("-30");
+        var b = NumberData.NumberData.FromString("-100");
         // Act
         var c = a + b;
         var outStr = c.ToString();
@@ -64,8 +62,8 @@ public class NumberDataTestScript_OperationsPlusAndMinus
     public void NumberData_Substract()
     {
         // Arrange
-        var a = NumberData.FromString("110");
-        var b = NumberData.FromString("10");
+        var a = NumberData.NumberData.FromString("110");
+        var b = NumberData.NumberData.FromString("10");
         // Act
         var c = a - b;
         var outStr = c.ToString();
@@ -78,8 +76,8 @@ public class NumberDataTestScript_OperationsPlusAndMinus
     public void NumberData_Substract_Zero()
     {
         // Arrange
-        var a = NumberData.FromString("110");
-        var b = NumberData.FromString("0");
+        var a = NumberData.NumberData.FromString("110");
+        var b = NumberData.NumberData.FromString("0");
         // Act
         var c = a - b;
         var outStr = c.ToString();
@@ -92,8 +90,8 @@ public class NumberDataTestScript_OperationsPlusAndMinus
     public void NumberData_Substract_Negative()
     {
         // Arrange
-        var a = NumberData.FromString("30");
-        var b = NumberData.FromString("100");
+        var a = NumberData.NumberData.FromString("30");
+        var b = NumberData.NumberData.FromString("100");
         // Act
         var c = a - b;
         var outStr = c.ToString();
@@ -106,8 +104,8 @@ public class NumberDataTestScript_OperationsPlusAndMinus
     public void NumberData_Substract_TwoNegs()
     {
         // Arrange
-        var a = NumberData.FromString("-30");
-        var b = NumberData.FromString("100");
+        var a = NumberData.NumberData.FromString("-30");
+        var b = NumberData.NumberData.FromString("100");
         // Act
         var c = a - b;
         var outStr = c.ToString();

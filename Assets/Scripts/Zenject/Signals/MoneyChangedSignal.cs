@@ -2,9 +2,9 @@ namespace Zenject.Signals
 {
     public class MoneyChangedSignal
     {
-        public readonly NumberData Value;
+        public readonly NumberData.NumberData Value;
 
-        public MoneyChangedSignal(NumberData value)
+        public MoneyChangedSignal(NumberData.NumberData value)
         {
             Value = value;
         }

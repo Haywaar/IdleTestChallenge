@@ -7,10 +7,7 @@ namespace Zenject
 {
     public class GameInstaller : MonoInstaller
     {
-        [SerializeField] private UpgradeConfigScriptableObject _upgradeConfigScriptableObject;
-        [SerializeField] private UpgradeConfigRemoteFile _upgradeConfigRemoteFile;
-        [SerializeField] private bool isRemoteConfigs;
-        
+        [SerializeField] private ConfigLoader _configLoader;
         [SerializeField] private DiggerManager _diggerManager;
         [SerializeField] private MoneyManager _moneyManager;
 
@@ -35,20 +32,13 @@ namespace Zenject
             Container.DeclareSignal<SpendMoneySignal>().OptionalSubscriber();
             Container.DeclareSignal<MoneyChangedSignal>().OptionalSubscriber();
             
-            Container.DeclareSignal<GameStartedSignal>().OptionalSubscriber();
+            Container.DeclareSignal<LoadFinishedSignal>().OptionalSubscriber();
         }
 
         private void BindConfigs()
         {
-            if (isRemoteConfigs)
-            {
-                Debug.LogWarning("Bind remote!");
-                Container.Bind<IUpgradeConfig>().FromInstance(_upgradeConfigRemoteFile).AsSingle();
-            }
-            else
-            {
-                Container.Bind<IUpgradeConfig>().FromInstance(_upgradeConfigScriptableObject).AsSingle();
-            }
+            Container.Bind<IUpgradeConfig>().FromInstance(_configLoader.GetUpgradeConfig()).AsSingle();
+            Container.Bind<ICircleConfig>().FromInstance(_configLoader.GetCircleConfig()).AsSingle();
         }
     }
 }

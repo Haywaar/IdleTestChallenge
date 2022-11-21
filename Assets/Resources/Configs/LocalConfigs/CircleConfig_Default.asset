@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f216e715f504949916699da8b54ecb, type: 3}
   m_Name: CircleConfig_Default
   m_EditorClassIdentifier: 
-  _maxCirclesCount: 5
-  _firstCirclePrice: 10
-  _nextBuyCircleCoef: 2
-  _circleAttackCooldown: 1
+  _configData:
+    maxCirclesCount: 5
+    firstCirclePrice: 100
+    nextBuyCircleCoef: 10
+    circleAttackCooldown: 1
