@@ -1,8 +1,8 @@
-﻿namespace Configs
+﻿namespace Configs.CircleConfig
 {
     public interface ICircleConfig
     {
-        public NumberData.NumberData GetBuyPrice(int circlesCount);
+        public NumberData GetBuyPrice(int circlesCount);
         
         public int GetMaxCirclesCount();
 

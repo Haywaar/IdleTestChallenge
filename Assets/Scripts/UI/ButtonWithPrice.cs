@@ -12,13 +12,13 @@ namespace UI
         [SerializeField] private Color _activeColor = Color.white;
         [SerializeField] private Color _inactiveColor = Color.gray;
 
-        public void Init(UnityAction callback, NumberData.NumberData numberData)
+        public void Init(UnityAction callback, NumberData numberData)
         {
             _button.onClick.AddListener(callback);
             SetPrice(numberData);
         }
 
-        public void SetPrice(NumberData.NumberData numberData)
+        public void SetPrice(NumberData numberData)
         {
             _priceText.text = numberData.ToString();
         }

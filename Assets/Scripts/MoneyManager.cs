@@ -6,9 +6,9 @@ using Zenject.Signals;
 public class MoneyManager : MonoBehaviour
 {
     [SerializeField] private int _startMoney = 0;
-    private NumberData.NumberData _money;
+    private NumberData _money;
 
-    public NumberData.NumberData Money => _money;
+    public NumberData Money => _money;
 
     private SignalBus _signalBus;
 
@@ -31,7 +31,7 @@ public class MoneyManager : MonoBehaviour
 
     private void Awake()
     {
-        _money = NumberData.NumberData.FromInt(_startMoney);
+        _money = NumberData.FromInt(_startMoney);
     }
 
     private void OnMoneySpent(SpendMoneySignal signal)

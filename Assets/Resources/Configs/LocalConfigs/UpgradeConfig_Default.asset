@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b02a26993cf9d48aaeb0cd74761931, type: 3}
   m_Name: UpgradeConfig_Default
   m_EditorClassIdentifier: 
-  koef1: 5
-  koef2: 1.08
+  _configData:
+    Koef1: 5
+    Koef2: 1.08

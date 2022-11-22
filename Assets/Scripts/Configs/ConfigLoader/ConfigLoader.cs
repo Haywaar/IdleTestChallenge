@@ -1,30 +1,35 @@
-using System;
-using Configs;
+using Configs.CircleConfig;
+using Configs.GoldByTapConfig;
+using Configs.UpgradeConfig;
 using UnityEngine;
 using Zenject;
 using Zenject.Signals;
 
-public abstract class ConfigLoader : MonoBehaviour
+namespace Configs.ConfigLoader
 {
-    private SignalBus _signalBus;
-
-    [Inject]
-    private void Construct(SignalBus signalBus)
+    public abstract class ConfigLoader : MonoBehaviour
     {
-        _signalBus = signalBus;
-    }
+        private SignalBus _signalBus;
 
-    private void Start()
-    {
-        LoadAll();
-    }
+        [Inject]
+        private void Construct(SignalBus signalBus)
+        {
+            _signalBus = signalBus;
+        }
 
-    public abstract IUpgradeConfig GetUpgradeConfig();
-    public abstract ICircleConfig GetCircleConfig();
-    protected abstract void LoadAll();
+        private void Start()
+        {
+            LoadAll();
+        }
 
-    protected void LoadFinished()
-    {
-        _signalBus.Fire<LoadFinishedSignal>();
+        public abstract IUpgradeConfig GetUpgradeConfig();
+        public abstract ICircleConfig GetCircleConfig();
+        public abstract IGoldByTapConfig GetGoldByTapConfig();
+        protected abstract void LoadAll();
+
+        protected void LoadFinished()
+        {
+            _signalBus.Fire<LoadFinishedSignal>();
+        }
     }
 }

@@ -6,7 +6,7 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Multiply_x1()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("123");
+        var a = NumberData.FromString("123");
         var b = 1;
         // Act
         var c = a * b;
@@ -20,7 +20,7 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Multiply_x2()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("123");
+        var a = NumberData.FromString("123");
         var b = 2;
         // Act
         var c = a * b;
@@ -34,7 +34,7 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Multiply_x10()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("123");
+        var a = NumberData.FromString("123");
         var b = 10;
         // Act
         var c = a * b;
@@ -48,7 +48,7 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Multiply_MinusOne()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("123");
+        var a = NumberData.FromString("123");
         var b = -1;
         // Act
         var c = a * b;
@@ -62,8 +62,8 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Greater()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("456");
-        var b = NumberData.NumberData.FromString("123");
+        var a = NumberData.FromString("456");
+        var b = NumberData.FromString("123");
 
         // Act
         bool rez = a > b;
@@ -76,8 +76,8 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Greater_Equals()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("456");
-        var b = NumberData.NumberData.FromString("456");
+        var a = NumberData.FromString("456");
+        var b = NumberData.FromString("456");
 
         // Act
         bool rez = a > b;
@@ -90,8 +90,8 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Greater_Neg()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("56");
-        var b = NumberData.NumberData.FromString("-456");
+        var a = NumberData.FromString("56");
+        var b = NumberData.FromString("-456");
 
         // Act
         bool rez = a > b;
@@ -104,8 +104,8 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Lesser()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("123");
-        var b = NumberData.NumberData.FromString("456");
+        var a = NumberData.FromString("123");
+        var b = NumberData.FromString("456");
 
         // Act
         bool rez = a < b;
@@ -118,8 +118,8 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Lesser_Equals()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("456");
-        var b = NumberData.NumberData.FromString("456");
+        var a = NumberData.FromString("456");
+        var b = NumberData.FromString("456");
 
         // Act
         bool rez = a < b;
@@ -132,8 +132,8 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Lesser_Neg()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("-456");
-        var b = NumberData.NumberData.FromString("56");
+        var a = NumberData.FromString("-456");
+        var b = NumberData.FromString("56");
 
         // Act
         bool rez = a < b;
@@ -146,10 +146,10 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Abs()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("-456");
+        var a = NumberData.FromString("-456");
 
         // Act
-        var outStr = NumberData.NumberData.Abs(a).ToString();
+        var outStr = NumberData.Abs(a).ToString();
 
         // Assert
         Assert.AreEqual("456", outStr);
@@ -159,10 +159,10 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Abs_Same()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("456");
+        var a = NumberData.FromString("456");
 
         // Act
-        var outStr = NumberData.NumberData.Abs(a).ToString();
+        var outStr = NumberData.Abs(a).ToString();
 
         // Assert
         Assert.AreEqual("456", outStr);
@@ -172,8 +172,8 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Greater_Or_Equals()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("456");
-        var b = NumberData.NumberData.FromString("455");
+        var a = NumberData.FromString("456");
+        var b = NumberData.FromString("455");
 
         // Act
         bool rez = a >= b;
@@ -186,8 +186,8 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Greater_Or_Equals_2()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("123");
-        var b = NumberData.NumberData.FromString("455");
+        var a = NumberData.FromString("123");
+        var b = NumberData.FromString("455");
 
         // Act
         bool rez = a >= b;
@@ -200,8 +200,8 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Greater_Or_Equals_Same()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("456");
-        var b = NumberData.NumberData.FromString("456");
+        var a = NumberData.FromString("456");
+        var b = NumberData.FromString("456");
 
         // Act
         bool rez = a >= b;
@@ -214,8 +214,8 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Lesser_Or_Equals()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("123");
-        var b = NumberData.NumberData.FromString("455");
+        var a = NumberData.FromString("123");
+        var b = NumberData.FromString("455");
 
         // Act
         bool rez = a <= b;
@@ -228,8 +228,8 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Lesser_Or_Equals_Same()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("455");
-        var b = NumberData.NumberData.FromString("455");
+        var a = NumberData.FromString("455");
+        var b = NumberData.FromString("455");
 
         // Act
         bool rez = a <= b;
@@ -242,8 +242,8 @@ public class NumberData_Multiply_Equal_Greater
     public void NumberData_Lesser_Or_Equals_Diff_Length()
     {
         // Arrange
-        var a = NumberData.NumberData.FromString("1455");
-        var b = NumberData.NumberData.FromString("455");
+        var a = NumberData.FromString("1455");
+        var b = NumberData.FromString("455");
 
         // Act
         bool rez = a <= b;

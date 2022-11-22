@@ -1,11 +1,11 @@
-﻿namespace Configs
+﻿namespace Configs.CircleConfig
 {
     [System.Serializable]
     public struct CircleConfigData
     {
         public int maxCirclesCount;
         public int firstCirclePrice;
-        public float nextBuyCircleCoef;
+        public float nextBuyCircleKoef;
         public float circleAttackCooldown;
     }
 }

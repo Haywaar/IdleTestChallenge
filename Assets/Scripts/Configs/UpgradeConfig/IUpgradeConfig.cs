@@ -1,7 +1,7 @@
-namespace Configs
+namespace Configs.UpgradeConfig
 {
     public interface IUpgradeConfig
     {
-        public NumberData.NumberData GetUpgradePrice(int level);
+        public NumberData GetUpgradePrice(int level);
     }
 }

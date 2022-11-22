@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5ac1eb4667a504cac2148d5940ad98, type: 3}
   m_Name: GoldByTapConfig_Default
   m_EditorClassIdentifier: 
-  koef1: 5
-  koef2: 2.1
+  _configData:
+    Koef1: 5
+    Koef2: 2.1

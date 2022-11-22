@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Configs;
+using Configs.CircleConfig;
+using Configs.GoldByTapConfig;
+using Configs.UpgradeConfig;
 using UnityEngine;
 using Zenject;
 using Zenject.Signals;
@@ -10,8 +13,7 @@ namespace Digger
 {
     public class DiggerManager : MonoBehaviour
     {
-        [SerializeField] private GoldByTapConfig _goldByTapConfig;
-        
+        private IGoldByTapConfig _goldByTapConfig;
         private IUpgradeConfig _upgradeConfig;
         private ICircleConfig _circleConfig;
 
@@ -23,15 +25,18 @@ namespace Digger
 
         private PlayerDigger _playerDigger;
         private DiContainer _container;
-        
+
         [Inject]
-        private void Construct(SignalBus signalBus, MoneyManager moneyManager, DiContainer container, IUpgradeConfig upgradeConfig, ICircleConfig circleConfig)
+        private void Construct(SignalBus signalBus, MoneyManager moneyManager, DiContainer container,
+            IUpgradeConfig upgradeConfig, ICircleConfig circleConfig, IGoldByTapConfig goldByTapConfig)
         {
             _signalBus = signalBus;
             _moneyManager = moneyManager;
+            
             _upgradeConfig = upgradeConfig;
             _circleConfig = circleConfig;
-            
+            _goldByTapConfig = goldByTapConfig;
+
             _signalBus.Subscribe<AttackSignal>(OnAttack);
             _container = container;
         }
@@ -40,7 +45,7 @@ namespace Digger
         {
             _playerDigger = new PlayerDigger(0, 1);
             _container.Inject(_playerDigger);
-            
+
             _diggers.Add(_playerDigger);
         }
 
@@ -52,11 +57,11 @@ namespace Digger
                 _signalBus.Fire(new SpendMoneySignal(price));
                 int diggerId = _diggers.Count;
                 int level = 1;
-                
+
                 var circleDigger = new CircleDigger(diggerId, level, _circleConfig.GetCircleAttackCooldown());
                 _container.Inject(circleDigger);
                 circleDigger.StartAttack();
-                
+
                 _diggers.Add(circleDigger);
                 _signalBus.Fire(new CircleCreatedSignal(diggerId, level));
             }
@@ -66,12 +71,12 @@ namespace Digger
             }
         }
 
-        public NumberData.NumberData GetBuyCirclePrice()
+        public NumberData GetBuyCirclePrice()
         {
             int circlesCount = (_diggers.Count - 1);
             return _circleConfig.GetBuyPrice(circlesCount);
         }
-        
+
         public bool CanBuyCircle()
         {
             var price = GetBuyCirclePrice();
@@ -87,14 +92,14 @@ namespace Digger
         {
             return (_diggers.Count) < _circleConfig.GetMaxCirclesCount() + 1;
         }
-        
+
         private void OnAttack(AttackSignal signal)
         {
             var gold = _goldByTapConfig.GetGoldByTapValue(signal.Level);
             _signalBus.Fire(new AddMoneySignal(gold));
         }
-        
-        public NumberData.NumberData GetUpgradePrice(int diggerId)
+
+        public NumberData GetUpgradePrice(int diggerId)
         {
             var diggerLevel = _diggers.First(x => x.ID == diggerId).Level;
             return _upgradeConfig.GetUpgradePrice(diggerLevel);

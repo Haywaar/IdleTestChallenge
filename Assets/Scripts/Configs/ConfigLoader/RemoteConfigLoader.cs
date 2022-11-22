@@ -1,26 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
-using Configs;
-using UnityEngine;
+using Configs.CircleConfig;
+using Configs.GoldByTapConfig;
+using Configs.UpgradeConfig;
 
-public class RemoteConfigLoader : ConfigLoader
+namespace Configs.ConfigLoader
 {
-    private UpgradeConfigRemoteFile _upgradeConfigRemoteFile = new();
-    private CircleConfigRemote _circleConfigRemote = new();
-    public override IUpgradeConfig GetUpgradeConfig()
+    public class RemoteConfigLoader : ConfigLoader
     {
-        return _upgradeConfigRemoteFile;
-    }
+        private UpgradeConfigRemote _upgradeConfig = new();
+        private CircleConfigRemote _circleConfig = new();
+        private GoldByTapConfigRemote _goldByTapConfig = new();
 
-    public override ICircleConfig GetCircleConfig()
-    {
-        return _circleConfigRemote;
-    }
+        public override IUpgradeConfig GetUpgradeConfig()
+        {
+            return _upgradeConfig;
+        }
 
-    protected override async void LoadAll()
-    {
-        await _upgradeConfigRemoteFile.LoadData("UpgradeConfig.json");
-        await _circleConfigRemote.LoadData("CircleConfig.json");
-        LoadFinished();
+        public override ICircleConfig GetCircleConfig()
+        {
+            return _circleConfig;
+        }
+
+        public override IGoldByTapConfig GetGoldByTapConfig()
+        {
+            return _goldByTapConfig;
+        }
+
+        protected override async void LoadAll()
+        {
+            await _upgradeConfig.LoadData("UpgradeConfig.json");
+            await _circleConfig.LoadData("CircleConfig.json");
+            await _goldByTapConfig.LoadData("GoldByTapConfig.json");
+            LoadFinished();
+        }
     }
 }

@@ -1,18 +1,17 @@
 using UnityEngine;
 
-namespace Configs
+namespace Configs.UpgradeConfig
 {
     [CreateAssetMenu(fileName = "UpgradeConfigScriptableObject", menuName = "ScriptableObjects/UpgradeConfigScriptableObject", order = 1)]
     public class UpgradeConfigScriptableObject : ScriptableObject, IUpgradeConfig
     {
-        [Header("Formula = (k1 * k2)^level")]
-        [SerializeField] private float koef1 = 5;
-        [SerializeField] private float koef2 = 1.08f;
+        [Header("Formula = (k1 * k2)^level")] [SerializeField]
+        private UpgradeConfigData _configData;
 
-        public NumberData.NumberData GetUpgradePrice(int level)
+        public NumberData GetUpgradePrice(int level)
         {
-            var value = Mathf.Pow((koef1 * koef2), level);
-            return NumberData.NumberData.FromInt(Mathf.FloorToInt(value));
+            var value = Mathf.Pow((_configData.koef1 * _configData.koef2), level);
+            return NumberData.FromInt(Mathf.FloorToInt(value));
         }
     }
 }

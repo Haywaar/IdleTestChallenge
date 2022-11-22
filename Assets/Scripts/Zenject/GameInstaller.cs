@@ -1,4 +1,8 @@
 using Configs;
+using Configs.CircleConfig;
+using Configs.ConfigLoader;
+using Configs.GoldByTapConfig;
+using Configs.UpgradeConfig;
 using Digger;
 using UnityEngine;
 using Zenject.Signals;
@@ -39,6 +43,7 @@ namespace Zenject
         {
             Container.Bind<IUpgradeConfig>().FromInstance(_configLoader.GetUpgradeConfig()).AsSingle();
             Container.Bind<ICircleConfig>().FromInstance(_configLoader.GetCircleConfig()).AsSingle();
+            Container.Bind<IGoldByTapConfig>().FromInstance(_configLoader.GetGoldByTapConfig()).AsSingle();
         }
     }
 }

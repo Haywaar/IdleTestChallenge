@@ -15,5 +15,5 @@ MonoBehaviour:
   _configData:
     maxCirclesCount: 5
     firstCirclePrice: 100
-    nextBuyCircleCoef: 10
+    nextBuyCircleKoef: 10
     circleAttackCooldown: 1

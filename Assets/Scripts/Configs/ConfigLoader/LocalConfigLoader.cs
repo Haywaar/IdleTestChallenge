@@ -1,24 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
-using Configs;
+using Configs.CircleConfig;
+using Configs.GoldByTapConfig;
+using Configs.UpgradeConfig;
 using UnityEngine;
 
-public class LocalConfigLoader : ConfigLoader
+namespace Configs.ConfigLoader
 {
-    [SerializeField] private UpgradeConfigScriptableObject _upgradeConfigScriptableObject;
-    [SerializeField] private CircleConfigScriptableObject _circleConfigScriptableObject;
-    public override IUpgradeConfig GetUpgradeConfig()
+    public class LocalConfigLoader : ConfigLoader
     {
-        return _upgradeConfigScriptableObject;
-    }
+        [SerializeField] private UpgradeConfigScriptableObject _upgradeConfig;
+        [SerializeField] private CircleConfigScriptableObject _circleConfig;
+        [SerializeField] private GoldByTapConfigScriptableObject _goldByTapConfig;
 
-    public override ICircleConfig GetCircleConfig()
-    {
-        return _circleConfigScriptableObject;
-    }
+        public override IUpgradeConfig GetUpgradeConfig()
+        {
+            return _upgradeConfig;
+        }
 
-    protected override void LoadAll()
-    {
-        LoadFinished();
+        public override ICircleConfig GetCircleConfig()
+        {
+            return _circleConfig;
+        }
+
+        public override IGoldByTapConfig GetGoldByTapConfig()
+        {
+            return _goldByTapConfig;
+        }
+
+        protected override void LoadAll()
+        {
+            LoadFinished();
+        }
     }
 }
