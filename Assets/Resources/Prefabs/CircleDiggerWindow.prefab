@@ -487,6 +487,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2187475503222920672}
     m_Modifications:
+    - target: {fileID: 8792812855077931792, guid: b7c6b291e7db1cc48bdd94f8d85072d6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 60.133667
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792812855160683555, guid: b7c6b291e7db1cc48bdd94f8d85072d6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8792812856450017877, guid: b7c6b291e7db1cc48bdd94f8d85072d6, type: 3}
       propertyPath: m_Name
       value: UpgradeCircleView
@@ -578,6 +586,10 @@ PrefabInstance:
     - target: {fileID: 8792812856450017882, guid: b7c6b291e7db1cc48bdd94f8d85072d6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792812856805397627, guid: b7c6b291e7db1cc48bdd94f8d85072d6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 94
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7c6b291e7db1cc48bdd94f8d85072d6, type: 3}

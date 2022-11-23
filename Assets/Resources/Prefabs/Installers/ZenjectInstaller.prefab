@@ -92,9 +92,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c676cfe84c778994e80e31df6ee22471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configLoader: {fileID: 5608225343626100742, guid: 76f002087b106db448d895c6392e48da, type: 3}
+  _configLoader: {fileID: 0}
   _diggerManager: {fileID: 1532538660971748414}
   _moneyManager: {fileID: 1532538660971748413}
+  _colorConfig: {fileID: 11400000, guid: 260accae32a916243b21d0c367128572, type: 2}
+  _enemyView: {fileID: 0}
 --- !u!114 &1532538660971748415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,4 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8519d57aea40752468664969530181eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startMoney: 0
+  _startMoney: 300

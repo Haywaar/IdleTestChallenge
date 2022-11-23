@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using Zenject;
 using Zenject.Signals;
 
-public class Enemy : MonoBehaviour
+public class EnemyView : MonoBehaviour
 {
     [SerializeField] private Image _image;
     [SerializeField] private float _shakeTime = 0.1f;
@@ -26,5 +26,10 @@ public class Enemy : MonoBehaviour
     {
         _image.transform.localPosition = Vector3.zero;
         _image.transform.DOShakePosition(_shakeTime, 50f, 10, 11);
+    }
+
+    public Vector3 Position()
+    {
+        return _image.transform.position;
     }
 }

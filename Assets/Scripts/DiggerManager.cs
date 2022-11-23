@@ -100,7 +100,7 @@ namespace Digger
         private void OnAttack(AttackSignal signal)
         {
             var gold = _goldByTapConfig.GetGoldByTapValue(signal.Level);
-            _signalBus.Fire(new AddMoneySignal(gold));
+            _signalBus.Fire(new AddMoneySignal(gold, signal.Level));
         }
 
         public NumberData GetUpgradePrice(int diggerId)

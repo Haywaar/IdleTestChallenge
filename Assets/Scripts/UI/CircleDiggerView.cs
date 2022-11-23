@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using Configs;
+﻿using Configs;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 using Zenject.Signals;
-using DG.Tweening;
 
-namespace Digger
+namespace UI
 {
     public class CircleDiggerView : MonoBehaviour
     {
         [SerializeField] private Image _image;
+        [SerializeField] private Text _levelText;
+
+        [SerializeField] private ShootProjectile _shootProjectile;
+        [SerializeField] private float _projFlyTime;
+        
         private SignalBus _signalBus;
         private LevelColorConfig _colorConfig;
+        private EnemyView _enemyView;
 
         private int _diggerId;
 
@@ -24,10 +28,11 @@ namespace Digger
         public int Level => _level;
 
         [Inject]
-        private void Construct(SignalBus signalBus, LevelColorConfig colorConfig)
+        private void Construct(SignalBus signalBus, LevelColorConfig colorConfig, EnemyView enemyView)
         {
             _signalBus = signalBus;
             _colorConfig = colorConfig;
+            _enemyView = enemyView;
         }
 
         public void Initialize(int diggerId, int level)
@@ -36,6 +41,8 @@ namespace Digger
             _signalBus.Subscribe<UpgradeDiggerSignal>(VisualizeUpgrade);
             _diggerId = diggerId;
             _level = level;
+            
+            _levelText.text = _level.ToString();
         }
 
         private void VisualizeUpgrade(UpgradeDiggerSignal signal)
@@ -44,6 +51,7 @@ namespace Digger
             {
                 _level = signal.Level;
                 SetSpriteColor(_level);
+                _levelText.text = _level.ToString();
             }
         }
 
@@ -51,7 +59,18 @@ namespace Digger
         {
             if (signal.DiggerId == _diggerId)
             {
+                // Circle shake logic
                 transform.DOPunchScale(Vector3.one * 1.3f, 0.3f, 20);
+                
+                // Shoot logic
+                _shootProjectile.transform.localPosition = Vector3.zero;
+                _shootProjectile.SetColor(_colorConfig.GetColorForLevel(signal.Level));
+                _shootProjectile.gameObject.SetActive(true);
+                var tween = _shootProjectile.Rect.DOMove(_enemyView.Position(), _projFlyTime);
+                tween.onComplete += () =>
+                {
+                    _shootProjectile.gameObject.SetActive(false);
+                };
             }
         }
 

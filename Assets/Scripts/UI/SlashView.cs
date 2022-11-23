@@ -12,20 +12,19 @@ namespace UI
     /// <summary>
     /// Visualisation of slashes, made by user click on cube
     /// </summary>
-    [RequireComponent(typeof(TrailRenderer))]
     public class SlashView : MonoBehaviour
     {
         [SerializeField] private RectTransform _slash;
-
+        [SerializeField] private TrailRenderer _trailRenderer;
         [SerializeField] private float xLeft;
         [SerializeField] private float minY;
         [SerializeField] private float xRight;
         [SerializeField] private float maxY;
         [SerializeField] private float slashTime = 0.1f;
-        
+
         private SignalBus _signalBus;
         private Tween _slashTween;
-        private TrailRenderer _trailRenderer;
+
         private bool _slashToLeft;
         private LevelColorConfig _colorConfig;
 
@@ -40,8 +39,6 @@ namespace UI
         {
             _signalBus.Subscribe<AttackSignal>(OnAttack);
             _signalBus.Subscribe<UpgradeDiggerSignal>(OnUpgradeDigger);
-
-            _trailRenderer = GetComponent<TrailRenderer>();
         }
 
         private void OnAttack(AttackSignal signal)
@@ -78,12 +75,9 @@ namespace UI
             _slashToLeft = !_slashToLeft;
 
 
-            _slashTween.onComplete += () =>
-            {
-                _slash.gameObject.SetActive(false);
-            };
+            _slashTween.onComplete += () => { _slash.gameObject.SetActive(false); };
         }
-        
+
         private void OnUpgradeDigger(UpgradeDiggerSignal obj)
         {
             if (obj.Id == DiggerManager.PlayerDiggerId)

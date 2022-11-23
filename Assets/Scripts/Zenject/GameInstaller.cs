@@ -15,13 +15,16 @@ namespace Zenject
         [SerializeField] private DiggerManager _diggerManager;
         [SerializeField] private MoneyManager _moneyManager;
         [SerializeField] private LevelColorConfig _colorConfig;
-
+        [SerializeField] private EnemyView _enemyView;
+        
         public override void InstallBindings()
         {
             Container.Bind<DiggerManager>().FromInstance(_diggerManager).AsSingle();
             Container.Bind<MoneyManager>().FromInstance(_moneyManager).AsSingle();
+            
             BindSignals();
             BindConfigs();
+            BindUI();
         }
 
         private void BindSignals()
@@ -47,6 +50,11 @@ namespace Zenject
             Container.Bind<IGoldByTapConfig>().FromInstance(_configLoader.GetGoldByTapConfig()).AsSingle();
             
             Container.Bind<LevelColorConfig>().FromInstance(_colorConfig).AsSingle();
+        }
+
+        private void BindUI()
+        {
+            Container.Bind<EnemyView>().FromInstance(_enemyView).AsSingle();
         }
     }
 }
