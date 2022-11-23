@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GoldByTapConfig_Default
   m_EditorClassIdentifier: 
   _configData:
-    Koef1: 5
-    Koef2: 2.1
+    koef1: 5
+    koef2: 2.1

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: UpgradeConfig_Default
   m_EditorClassIdentifier: 
   _configData:
-    Koef1: 5
-    Koef2: 1.08
+    koef1: 5
+    koef2: 1.08

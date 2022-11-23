@@ -24,6 +24,9 @@ namespace Digger
         private MoneyManager _moneyManager;
 
         private PlayerDigger _playerDigger;
+
+        public PlayerDigger PlayerDigger => _playerDigger;
+
         private DiContainer _container;
 
         [Inject]
@@ -54,7 +57,6 @@ namespace Digger
             var price = GetBuyCirclePrice();
             if (CanBuyCircle())
             {
-                _signalBus.Fire(new SpendMoneySignal(price));
                 int diggerId = _diggers.Count;
                 int level = 1;
 
@@ -64,6 +66,8 @@ namespace Digger
 
                 _diggers.Add(circleDigger);
                 _signalBus.Fire(new CircleCreatedSignal(diggerId, level));
+                
+                _signalBus.Fire(new SpendMoneySignal(price));
             }
             else
             {
@@ -104,6 +108,11 @@ namespace Digger
             var diggerLevel = _diggers.First(x => x.ID == diggerId).Level;
             return _upgradeConfig.GetUpgradePrice(diggerLevel);
         }
+        
+        public NumberData GetUpgradePriceByLevel(int diggerLevel)
+        {
+            return _upgradeConfig.GetUpgradePrice(diggerLevel);
+        }
 
         public void Upgrade(int diggerId)
         {
@@ -111,8 +120,8 @@ namespace Digger
             if (_moneyManager.Money >= price)
             {
                 var newLevel = _diggers.First(x => x.ID == diggerId).Level + 1;
-                _signalBus.Fire(new SpendMoneySignal(price));
                 _signalBus.Fire(new UpgradeDiggerSignal(diggerId, newLevel));
+                _signalBus.Fire(new SpendMoneySignal(price));
             }
             else
             {

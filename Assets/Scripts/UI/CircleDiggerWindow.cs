@@ -35,6 +35,7 @@ public class CircleDiggerWindow : MonoBehaviour
       _container.Inject(circleView);
       _circleViews.Add(circleView);
       circleView.transform.localPosition = Vector3.zero;
+      circleView.transform.localScale = Vector3.one;
 
       circleView.Initialize(signal.DiggerId, signal.Level);
    }

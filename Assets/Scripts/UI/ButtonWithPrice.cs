@@ -26,6 +26,7 @@ namespace UI
         public void SetMax()
         {
             _priceText.text = "Max!";
+            _button.image.color = _inactiveColor;
         }
 
         public void SetInteractable(bool isActive)

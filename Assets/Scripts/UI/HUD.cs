@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Configs;
 using Digger;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,15 +14,19 @@ namespace UI
         [SerializeField] private ButtonWithPrice _buyCircleButton;
         [SerializeField] private ButtonWithPrice _upgradePlayerButton;
 
+        [SerializeField] private Text _playerLevelText;
+        [SerializeField] private Image _playerBladeImage;
+
         private SignalBus _signalBus;
         private DiggerManager _diggerManager;
-        private DiContainer _container;
+        private LevelColorConfig _colorConfig;
     
         [Inject]
-        private void Construct(SignalBus signalBus, DiggerManager diggerManager)
+        private void Construct(SignalBus signalBus, DiggerManager diggerManager, LevelColorConfig colorConfig)
         {
             _signalBus = signalBus;
             _diggerManager = diggerManager;
+            _colorConfig = colorConfig;
         
             _signalBus.Subscribe<MoneyChangedSignal>(OnMoneyChanged);
             _signalBus.Subscribe<CircleCreatedSignal>(OnCircleCreated);
@@ -41,6 +47,9 @@ namespace UI
             
             _buyCircleButton.SetInteractable(_diggerManager.CanBuyCircle());
             _upgradePlayerButton.SetInteractable(_diggerManager.CanUpgrade(DiggerManager.PlayerDiggerId));
+            
+            _playerLevelText.text = "Level: " + _diggerManager.PlayerDigger.Level;
+            PaintBladeColor(_diggerManager.PlayerDigger.Level);
         }
 
         private void BuyCircleButtonClicked()
@@ -74,9 +83,15 @@ namespace UI
         {
             if (DiggerManager.PlayerDiggerId == signal.Id)
             {
-                _upgradePlayerButton.SetPrice(_diggerManager.GetUpgradePrice(DiggerManager.PlayerDiggerId));
+                _upgradePlayerButton.SetPrice(_diggerManager.GetUpgradePriceByLevel(signal.Level));
+                _playerLevelText.text = "Level: " + signal.Level;
+                PaintBladeColor(signal.Level);
             }
         }
 
+        private void PaintBladeColor(int level)
+        {
+            _playerBladeImage.color = _colorConfig.GetColorForLevel(level);
+        }
     }
 }
