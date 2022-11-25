@@ -1,7 +1,6 @@
-using Configs.GoldByTapConfig;
 using UnityEngine;
 
-namespace Configs
+namespace Configs.GoldByTapConfig
 {
     [CreateAssetMenu(fileName = "GoldByTapConfig", menuName = "ScriptableObjects/GoldByTapConfig", order = 1)]
     public class GoldByTapConfigScriptableObject : ScriptableObject, IGoldByTapConfig

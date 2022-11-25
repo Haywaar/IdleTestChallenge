@@ -8,7 +8,10 @@ public class EnemyView : MonoBehaviour
 {
     [SerializeField] private Image _image;
     [SerializeField] private float _shakeTime = 0.1f;
-    
+
+    [Header("Change from 0 if you want diggers attack not in center of enemy")] [SerializeField]
+    private float _randomOffsetRadius;
+
     private SignalBus _signalBus;
 
     [Inject]
@@ -30,6 +33,8 @@ public class EnemyView : MonoBehaviour
 
     public Vector3 Position()
     {
-        return _image.transform.position;
+        var randomX = Random.Range(-1 * _randomOffsetRadius, _randomOffsetRadius);
+        var randomY = Random.Range(-1 * _randomOffsetRadius, _randomOffsetRadius);
+        return _image.transform.position + new Vector3(randomX, randomY);
     }
 }

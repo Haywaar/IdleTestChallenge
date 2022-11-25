@@ -8,15 +8,19 @@ namespace UI
 {
    public class UpgradeCircleView : MonoBehaviour
    {
-      [SerializeField] private Image _icon;
       [SerializeField] private Text _upgradePriceText;
    
       [SerializeField] private Button _upgradeButton;
       [SerializeField] private Image _upgradeButtonImage;
 
+      [SerializeField] private Color _activeColor;
+      [SerializeField] private Color _inactiveColor;
       private SignalBus _signalBus;
       private DiggerManager _diggerManager;
       private int _diggerId;
+
+      public int DiggerId => _diggerId;
+
       private int _level;
    
       [Inject]
@@ -55,7 +59,7 @@ namespace UI
       private void SetUpgradeButtonInteractable(bool isActive)
       {
          _upgradeButton.interactable = isActive;
-         _upgradeButtonImage.color = isActive ? Color.white : Color.gray;
+         _upgradeButtonImage.color = isActive ? _activeColor : _inactiveColor;
       }
    }
 }

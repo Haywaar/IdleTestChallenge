@@ -1,6 +1,7 @@
 using Configs.CircleConfig;
 using Configs.GoldByTapConfig;
 using Configs.UpgradeConfig;
+using UnityEngine;
 
 namespace Configs.ConfigLoader
 {
@@ -10,6 +11,10 @@ namespace Configs.ConfigLoader
         private CircleConfigRemote _circleConfig = new();
         private GoldByTapConfigRemote _goldByTapConfig = new();
 
+        [SerializeField] private string _upgradeConfigName = "UpgradeConfig.json";
+        [SerializeField] private string _circleConfigName = "CircleConfig.json";
+        [SerializeField] private string _goldByTapConfigName = "GoldByTapConfig.json";
+        
         public override IUpgradeConfig GetUpgradeConfig()
         {
             return _upgradeConfig;
@@ -27,9 +32,9 @@ namespace Configs.ConfigLoader
 
         protected override async void LoadAll()
         {
-            await _upgradeConfig.LoadData("UpgradeConfig.json");
-            await _circleConfig.LoadData("CircleConfig.json");
-            await _goldByTapConfig.LoadData("GoldByTapConfig.json");
+            await _upgradeConfig.LoadData(_upgradeConfigName);
+            await _circleConfig.LoadData(_circleConfigName);
+            await _goldByTapConfig.LoadData(_goldByTapConfigName);
             LoadFinished();
         }
     }

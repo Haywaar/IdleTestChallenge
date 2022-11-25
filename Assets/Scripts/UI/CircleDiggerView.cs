@@ -10,11 +10,11 @@ namespace UI
     public class CircleDiggerView : MonoBehaviour
     {
         [SerializeField] private Image _image;
+        [SerializeField] private Button _button;
         [SerializeField] private Text _levelText;
-
+        
         [SerializeField] private ShootProjectile _shootProjectile;
         [SerializeField] private float _projFlyTime;
-        
         private SignalBus _signalBus;
         private LevelColorConfig _colorConfig;
         private EnemyView _enemyView;
@@ -43,6 +43,10 @@ namespace UI
             _level = level;
             
             _levelText.text = _level.ToString();
+            _button.onClick.AddListener(() =>
+            {
+                _signalBus.Fire(new CircleClickedSignal(DiggerId, Level));
+            });
         }
 
         private void VisualizeUpgrade(UpgradeDiggerSignal signal)

@@ -6,7 +6,7 @@ namespace Configs.CircleConfig
     [CreateAssetMenu(fileName = "CircleConfig", menuName = "ScriptableObjects/CircleConfig", order = 1)]
     public class CircleConfigScriptableObject : ScriptableObject, ICircleConfig
     {
-        [Header("BuyPrice = firstCirclePrice*(nextBuyCircleKoef^circlesCount")]
+        [Header("BuyPrice = firstCirclePrice*(nextBuyCircleKoef^circlesCount)")]
         [SerializeField] private CircleConfigData _configData;
 
         public NumberData GetBuyPrice(int circlesCount)

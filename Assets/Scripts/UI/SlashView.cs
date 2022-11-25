@@ -1,4 +1,3 @@
-using System;
 using Configs;
 using DG.Tweening;
 using Digger;

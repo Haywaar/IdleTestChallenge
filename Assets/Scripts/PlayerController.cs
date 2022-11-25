@@ -40,17 +40,6 @@ namespace Digger
                             _signalBus.Fire(new PlayerClickedSignal());
                            break;
                         }
-                        
-                        if (result.gameObject.tag.Equals("Circle"))
-                        {
-                            // circle selected
-                            var circleDiggerView = result.gameObject.GetComponent<CircleDiggerView>();
-                            if (circleDiggerView != null)
-                            {
-                                _signalBus.Fire(new CircleClickedSignal(circleDiggerView.DiggerId, circleDiggerView.Level));
-                            }
-                            break;
-                        }
                     }
                 }
             }
